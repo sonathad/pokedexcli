@@ -56,6 +56,14 @@ exit: Exit the Pokedex`)
 		os.Exit(0)
 	}
 
+	nextMapCmd := func() {
+		MapCmd("next")
+	}
+
+	prevMapCmd := func() {
+		MapCmd("prev")
+	}
+
 	return map[string]cliCmd{
 		"help": {
 			name:        "help",
@@ -70,12 +78,12 @@ exit: Exit the Pokedex`)
 		"map": {
 			name:        "map",
 			description: "The map command displays the names of 20 location areas in the Pokemon world. Each subsequent call to map should display the next 20 locations",
-			cb:          MapCmd,
+			cb:          nextMapCmd,
 		},
 		"mapb": {
 			name:        "mapb",
 			description: "The mapb command displays the names of 20 location areas in the Pokemon world. Each subsequent call to mapb should display the previous 20 locations",
-			cb:          MapBCmd,
+			cb:          prevMapCmd,
 		},
 	}
 }

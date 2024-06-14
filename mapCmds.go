@@ -15,18 +15,26 @@ type Location struct {
 
 type MapResponse struct {
 	Count    int        `json:"count"`
-	Next     string     `json:"next"`
-	Previous string     `json:"previous"`
+	Next     *string    `json:"next"`
+	Previous *string    `json:"previous"`
 	Results  []Location `json:"results"`
 }
 
-const (
-	nextAreaUrl string = "https://pokeapi.co/api/v2/location-area/"
-)
+var mapResponse MapResponse
 
-func MapCmd() {
-	fmt.Println("Map command used")
-	res, err := http.Get(nextAreaUrl)
+func MapCmd(areaUrl string) {
+	if areaUrl == "next" {
+		if mapResponse.Next != nil {
+			areaUrl = *mapResponse.Next
+		} else {
+			areaUrl = "https://pokeapi.co/api/v2/location-area/"
+		}
+	} else if areaUrl == "prev" {
+		areaUrl = *mapResponse.Previous
+	} else {
+		areaUrl = "https://pokeapi.co/api/v2/location-area/"
+	}
+	res, err := http.Get(areaUrl)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -39,17 +47,14 @@ func MapCmd() {
 		log.Fatal(err)
 	}
 
-	var mapResponse MapResponse
 	err = json.Unmarshal(body, &mapResponse)
 	if err != nil {
 		log.Fatalf("Failed to unmarshal JSON: %v", err)
 	}
 
-	// fmt.Printf("Map Response: %+v\n", mapResponse)
-	fmt.Printf("Next is %v\n", string(mapResponse.Next))
-
-}
-
-func MapBCmd() {
-	fmt.Println("Mapb command used")
+	areaUrl = string(*mapResponse.Next)
+	for _, location := range mapResponse.Results {
+		fmt.Println(location.Name)
+	}
+	fmt.Printf("Next is %v\n", areaUrl)
 }
