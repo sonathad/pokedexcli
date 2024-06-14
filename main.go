@@ -30,11 +30,13 @@ func Pokedex() {
 		}
 		currentCmd, ok := commandsMap()[text]
 		if !ok {
-			fmt.Println("command not found, thank you for playing!")
+			fmt.Println("command not found")
 			break
 		}
 		currentCmd.cb()
 	}
+
+	fmt.Println("Thank you for playing!")
 }
 
 func ShowPrompt() {
@@ -43,7 +45,10 @@ func ShowPrompt() {
 
 func commandsMap() map[string]cliCmd {
 	helpCmd := func() {
-		fmt.Println("help is running")
+		fmt.Println(`Usage:
+
+help: Displays a help message
+exit: Exit the Pokedex`)
 	}
 
 	exitCmd := func() {
