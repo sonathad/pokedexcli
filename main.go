@@ -1,9 +1,11 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
-	fmt.Println("Welcome to Pokedex CLI!")
+	fmt.Println(Greeter())
+}
+
+func Greeter() string {
+	return "Welcome to Pokedex CLI!"
 }
