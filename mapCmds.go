@@ -52,9 +52,7 @@ func MapCmd(areaUrl string) {
 		log.Fatalf("Failed to unmarshal JSON: %v", err)
 	}
 
-	areaUrl = string(*mapResponse.Next)
 	for _, location := range mapResponse.Results {
 		fmt.Println(location.Name)
 	}
-	fmt.Printf("Next is %v\n", areaUrl)
 }
