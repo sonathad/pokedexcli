@@ -67,5 +67,15 @@ exit: Exit the Pokedex`)
 			description: "Exits Pokedex",
 			cb:          exitCmd,
 		},
+		"map": {
+			name:        "map",
+			description: "The map command displays the names of 20 location areas in the Pokemon world. Each subsequent call to map should display the next 20 locations",
+			cb:          MapCmd,
+		},
+		"mapb": {
+			name:        "mapb",
+			description: "The mapb command displays the names of 20 location areas in the Pokemon world. Each subsequent call to mapb should display the previous 20 locations",
+			cb:          MapBCmd,
+		},
 	}
 }
