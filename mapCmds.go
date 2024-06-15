@@ -8,17 +8,7 @@ import (
 	"net/http"
 )
 
-type Location struct {
-	Name string
-	Url  string
-}
-
-type MapResponse struct {
-	Count    int        `json:"count"`
-	Next     *string    `json:"next"`
-	Previous *string    `json:"previous"`
-	Results  []Location `json:"results"`
-}
+const baseUrl = "https://pokeapi.co/api/v2/location-area/"
 
 var mapResponse MapResponse
 

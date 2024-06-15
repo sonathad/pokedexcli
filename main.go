@@ -23,12 +23,11 @@ func Pokedex() {
 	for {
 		ShowPrompt()
 
-		sc.Scan()
-		text := sc.Text()
-		if text == "" {
+		if !sc.Scan() {
 			break
 		}
-		currentCmd, ok := commandsMap()[text]
+
+		currentCmd, ok := commandsMap()[sc.Text()]
 		if !ok {
 			fmt.Println("command not found")
 			break
